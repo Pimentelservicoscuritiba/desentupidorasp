@@ -1,0 +1,454 @@
+/* =========================================
+   1. RESET & VARIÁVEIS (Base do Design)
+   ========================================= */
+:root {
+    --primary-red: #8B0000;    /* Vermelho Sangue */
+    --primary-light: #b30000;
+    --accent-yellow: #FFC107;  /* Amarelo Ouro */
+    --text-dark: #1a1a1a;
+    --text-gray: #4a4a4a;
+    --bg-light: #f4f7f6;
+    --white: #FFFFFF;
+    --shadow: 0 5px 15px rgba(0,0,0,0.1);
+    --font-heading: 'Montserrat', sans-serif;
+    --font-body: 'Open Sans', sans-serif;
+    --header-height: 80px; /* Altura padrão do cabeçalho */
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: var(--font-body);
+    color: var(--text-dark);
+    line-height: 1.6;
+    background-color: var(--bg-light);
+    overflow-x: hidden;
+    /* Espaço para o cabeçalho fixo não cobrir o topo */
+    padding-top: var(--header-height); 
+}
+
+h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 800; text-transform: uppercase; }
+img { max-width: 100%; height: auto; display: block; } /* Imagens responsivas por padrão */
+
+/* =========================================
+   2. ESTILOS BASE (MOBILE DEFAULT)
+   Aqui definimos como o site se comporta no Celular
+   ========================================= */
+
+/* UTILITÁRIOS */
+.container { 
+    width: 100%; 
+    padding: 0 20px; 
+    margin: 0 auto; 
+}
+
+.text-center { text-align: center; }
+.highlight { color: var(--accent-yellow); text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
+.bg-red { background-color: var(--primary-red); color: var(--white); }
+.section-padding { padding: 60px 0; } /* Padding menor no mobile */
+.img-responsive { width: 100%; border-radius: 10px; box-shadow: var(--shadow); margin-bottom: 20px; }
+
+/* BOTÕES (Grandes para dedo) */
+.btn {
+    display: inline-block;
+    padding: 15px 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: transform 0.2s;
+    cursor: pointer;
+    border: none;
+    font-size: 1rem;
+    width: 100%; /* Botão ocupa largura total no mobile */
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.btn-primary {
+    background-color: var(--accent-yellow);
+    color: var(--primary-red);
+    box-shadow: 0 4px 14px rgba(255, 193, 7, 0.4);
+}
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 193, 7, 0.5);
+    color: var(--primary-red);
+}
+
+.btn-whatsapp {
+    background-color: #25D366;
+    color: var(--white);
+    box-shadow: 0 4px 14px rgba(37, 211, 102, 0.3);
+}
+
+/* HEADER & NAVEGAÇÃO MOBILE */
+header {
+    background: var(--primary-red);
+    height: var(--header-height);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: var(--shadow);
+    border-bottom: 4px solid var(--accent-yellow);
+    display: flex;
+    align-items: center;
+}
+
+.nav-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.logo img {
+    height: 50px;
+    border: 2px solid var(--white);
+    border-radius: 50%;
+    background: white;
+}
+
+/* ÍCONE HAMBÚRGUER (Visível por padrão no mobile) */
+.hamburger {
+    display: block;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 2001;
+}
+.bar {
+    display: block;
+    width: 28px;
+    height: 3px;
+    margin: 6px auto;
+    transition: all 0.3s ease-in-out;
+    background-color: var(--white);
+    border-radius: 3px;
+}
+
+/* MENU GAVETA (Estilo Mobile) */
+.nav-menu {
+    position: fixed;
+    left: -100%; /* Escondido fora da tela */
+    top: 0;
+    background-color: var(--primary-red);
+    width: 85%;
+    height: 100vh;
+    padding-top: 100px; /* Espaço pro logo */
+    text-align: center;
+    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 2px 0 10px rgba(0,0,0,0.5);
+    z-index: 2000;
+    overflow-y: auto; /* Rolagem se o menu for alto */
+}
+
+/* Classe JS para abrir o menu */
+.nav-menu.active { left: 0; }
+
+.nav-menu ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.nav-menu ul li {
+    width: 100%;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.nav-menu a {
+    display: block;
+    padding: 20px;
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+}
+
+/* Botão amarelo dentro do menu mobile */
+.nav-menu .btn-primary {
+    margin: 30px auto;
+    width: 80%;
+}
+
+/* ANIMAÇÃO HAMBÚRGUER X */
+.hamburger.active .bar:nth-child(2) { opacity: 0; }
+.hamburger.active .bar:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+.hamburger.active .bar:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+/* HERO SECTION MOBILE */
+.hero {
+    background: linear-gradient(rgba(139, 0, 0, 0.85), rgba(139, 0, 0, 0.7)), url('imagens/frota-desentupidora-sp.jpeg');
+    background-size: cover;
+    background-position: center;
+    color: var(--white);
+    padding: 80px 0;
+    height: 600px;
+    text-align: center;
+}
+.hero h1 { font-size: 1.8rem; margin-bottom: 15px;margin-top: 20px; line-height: 1.2; }
+.hero p { font-size: 1rem; margin-bottom: 30px; opacity: 0.95; }
+
+/* GRIDS E LAYOUTS MOBILE (1 Coluna) */
+.card-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Uma coluna só */
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.differential-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+/* Cards */
+.card {
+    background: var(--white);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    border-bottom: 5px solid var(--primary-red);
+}
+.card h3 { color: var(--primary-red); margin-bottom: 10px; font-size: 1.1rem; }
+
+/* Tabelas Responsivas */
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 20px;
+}
+.comparison-table {
+    width: 100%;
+    min-width: 600px; /* Força scroll horizontal no mobile */
+    border-collapse: collapse;
+    background: white;
+}
+.comparison-table th, .comparison-table td {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+    color: black;
+}
+.comparison-table th { background: var(--primary-red); color: white; }
+
+/* Listas */
+.check-list li, .step-list li, .ninja-list li { margin-bottom: 15px; font-size: 0.95rem; }
+.ninja-list li { background: #e0f2f1; padding: 15px; border-radius: 8px; border-left: 5px solid #009688; }
+
+/* Footer */
+footer {
+    background-color: #111; /* Fundo quase preto para contraste */
+    color: #bbb;
+    padding-top: 60px;
+    border-top: 5px solid var(--primary-red); /* Detalhe da marca no topo */
+    font-size: 0.95rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Mobile: 1 coluna */
+    gap: 40px;
+    padding-bottom: 40px;
+}
+
+.footer-col h4 {
+    color: var(--white);
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    border-left: 3px solid var(--accent-yellow); /* Detalhe amarelo */
+    padding-left: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.footer-col p {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-col ul li {
+    margin-bottom: 10px;
+}
+
+.footer-col a {
+    color: #bbb;
+    text-decoration: none;
+    transition: 0.3s;
+    display: inline-block;
+}
+
+.footer-col a:hover {
+    color: var(--accent-yellow);
+    transform: translateX(5px); /* Efeito sutil de movimento */
+}
+
+/* Logo no Footer */
+.footer-logo {
+    height: 60px;
+    background: white;
+    padding: 5px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    display: inline-block;
+}
+
+/* Barra de Copyright */
+.footer-bottom {
+    background-color: #000;
+    padding: 20px 0;
+    text-align: center;
+    border-top: 1px solid #222;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.footer-bottom strong { color: var(--white); }
+
+/* Ajuste Desktop para o Footer */
+@media (min-width: 769px) {
+    .footer-grid {
+        grid-template-columns: repeat(4, 1fr); /* 4 Colunas no PC */
+        text-align: left;
+    }
+}
+
+/* =========================================
+   3. ESTILOS DESKTOP & TABLET (Overrides)
+   Aqui "consertamos" o layout para telas grandes
+   ========================================= */
+@media (min-width: 769px) {
+    /* Container maior */
+    .container { max-width: 1140px; }
+    .section-padding { padding: 80px 0; }
+
+    /* Botões tamanho normal */
+    .btn { width: auto; margin-bottom: 0; }
+
+    /* Header Desktop */
+    .hamburger { display: none; } /* Esconde ícone */
+
+    .nav-menu {
+        position: static; /* Volta ao fluxo normal */
+        width: auto;
+        height: auto;
+        background: transparent;
+        padding: 0;
+        box-shadow: none;
+        overflow: visible;
+        transform: none;
+    }
+
+    .nav-menu ul {
+        flex-direction: row; /* Itens lado a lado */
+        align-items: center;
+        gap: 25px;
+    }
+
+    .nav-menu ul li { width: auto; border: none; }
+    .nav-menu a { padding: 0; font-size: 0.95rem; }
+    .nav:hover { color: var(--accent-yellow); }
+    
+    .nav-menu .btn-primary { margin: 0; width: auto; padding: 10px 20px; font-size: 0.9rem; }
+
+    /* Hero Desktop */
+    .hero { padding: 120px 0; }
+    .hero h1 { font-size: 3rem; }
+    .hero p { font-size: 1.3rem; }
+
+    /* Grids Desktop */
+    .card-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); } /* 3 colunas auto */
+    .differential-grid { grid-template-columns: 1fr 1fr; align-items: center; } /* 2 colunas */
+    
+    /* Tabelas */
+    .table-responsive { overflow: visible; }
+    .comparison-table { min-width: 100%; }
+}
+/* =========================================
+   ACORDEÃO ESTILOS
+   ========================================= */
+
+.accordion {
+    width: 100%;
+    margin: 30px 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.accordion-item {
+    border-bottom: 1px solid #eee;
+    background: white;
+}
+
+.accordion-item:last-child {
+    border-bottom: none;
+}
+
+.accordion-header {
+    width: 100%;
+    padding: 20px;
+    text-align: left;
+    background: white;
+    border: none;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--primary-red);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.accordion-header:hover {
+    background: #f9f9f9;
+}
+
+.accordion-item.active .accordion-header {
+    background: var(--primary-red);
+    color: white;
+}
+
+.accordion-icon {
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    background: #f9f9f9;
+}
+
+.accordion-content p {
+    padding: 20px;
+    margin: 0;
+    color: var(--text-gray);
+    line-height: 1.6;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .accordion-header {
+        font-size: 0.9rem;
+        padding: 15px;
+    }
+    
+    .accordion-content p {
+        padding: 15px;
+        font-size: 0.9rem;
+    }
+}

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Apontando o Sitemap para o Google achar rápido
+Sitemap: https://desentupidorasp.api.br/sitemap.xml

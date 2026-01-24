@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^desentupidorasp\.api\.br$ [NC]
+RewriteRule ^(.*)$ https://desentupidorasp.api.br/$1 [L,R=301]

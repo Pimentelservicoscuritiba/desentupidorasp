@@ -1,0 +1,37 @@
+{
+  "dataset_name": "Desentupidora SP POI Dataset",
+  "last_updated": "2026-02-13",
+  "provider": {
+    "name": "Desentupidora SP",
+    "website": "https://desentupidorasp.api.br",
+    "country": "BR"
+  },
+  "pois": [
+    {
+      "external_id": "desentupidora-sp-001",
+      "name": "Desentupidora SP",
+      "category": "drainage_service",
+      "address": {
+        "street": "Av. Paulista, 2028",
+        "district": "Bela Vista",
+        "city": "São Paulo",
+        "state": "SP",
+        "postal_code": "01310-200",
+        "country": "BR"
+      },
+      "location": {
+        "latitude": -23.558613225792307,
+        "longitude": -46.65928104871136
+      },
+      "contact": {
+        "phone": "+55 11 99900-9598",
+        "website": "https://desentupidorasp.api.br"
+      },
+      "opening_hours": "Mo-Su 00:00-23:59",
+      "service_area": {
+        "type": "city",
+        "name": "São Paulo"
+      }
+    }
+  ]
+}
